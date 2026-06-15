@@ -58,18 +58,21 @@ void MergeSort(vector<int> &arr, int st, int e){
 
 void merge(vector<int> &arr, int st, int mid, int e){
     vector<int> temp;
-    int i = st, j = mid;
+    int i = st;
+    int j = mid + 1;
 
-    while(i<=mid && j<=e){
-        if(arr[i] > arr[j]) temp.push_back(arr[i++]);
-        else temp.push_back(arr[j++]);
+    while(i <= mid && j <= e){
+        if(arr[i] <= arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
     }
 
-    while(i<=mid)   temp.push_back(arr[i++]);
-    while(j<=e)   temp.push_back(arr[j++]);
+    while(i <= mid) temp.push_back(arr[i++]);
+    while(j <= e)   temp.push_back(arr[j++]);
 
-    for(int idx=0; idx<temp.size(); idx++){
-        arr[idx+st] = temp[idx];
+    for(int idx = 0; idx < temp.size(); idx++){
+        arr[st + idx] = temp[idx];
     }
 }
 
@@ -102,3 +105,6 @@ int partition(vector<int> &arr, int st, int e){
     swap(arr[e],arr[idx]);
     return idx;
 }
+
+// STL Sort : O(nlogn)
+//sort(arr.begin(),arr.end());

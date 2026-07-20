@@ -1,83 +1,179 @@
+/*
+Searching
+
+1. Linear Search
+    - Works on both sorted and unsorted arrays.
+    - Checks every element one by one.
+
+2. Binary Search
+    - Works only on sorted arrays.
+    - Divide and Conquer approach.
+    - Eliminates half of the search space in every iteration.
+*/
+
 #include<iostream>
-#include<algorithm>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 
-// Linear Search - O(n), O(1), Unsorted array, small data, one tym search
-
+/*
+Linear Search
+- Time : O(n)
+- Space: O(1)
+- Works on sorted as well as unsorted arrays.
+- Best for small datasets or one-time searches.
+*/
 int linearSearch(vector<int> &arr, int key){
-    for (int i=0; i<arr.size(); i++){
-        if(arr[i] == key){return i;
-        }
+
+    for(int i = 0; i < arr.size(); i++){
+
+        if(arr[i] == key)
+            return i;
     }
+
     return -1;
 }
 
-//Binary Search - O(log n), O(1), minimum speed, allocate pages, aggresive cows 
-// works on sorted array
+
+/*
+Binary Search
+- Time : O(log n)
+- Space: O(1) (Iterative)
+- Divide and Conquer
+- Works only on sorted arrays.
+- Used in:
+    * Lower Bound
+    * Upper Bound
+    * First / Last Occurrence
+    * Search Insert Position
+    * Peak Element
+    * Rotated Sorted Array
+    * Answer-space Binary Search
+*/
 int Binary(vector<int> &arr, int key){
-    int s=0, e=arr.size()-1;
 
-    while(s<=e){
-        int mid = s + (e-s)/2;
+    int s = 0;
+    int e = arr.size() - 1;
 
-        if(arr[mid]==key)   return mid;
-        else if (arr[mid] > key){
-            e=mid-1;
-        }
-        else s=mid+1;
+    while(s <= e){
+
+        int mid = s + (e - s)/2;
+
+        if(arr[mid] == key)
+            return mid;
+
+        else if(arr[mid] > key)
+            e = mid - 1;
+
+        else
+            s = mid + 1;
     }
+
     return -1;
 }
 
 
-//Q- First Occurrence
+/*
+First Occurrence
+- Time : O(log n)
+- Space: O(1)
+- Continue searching towards the left even after finding the key.
+*/
 int firstOcc(vector<int> &arr, int key){
-    int s=0, e=arr.size()-1,ans=-1;
 
-    while(s<=e){
-        int mid = s + (e-s)/2;
+    int s = 0;
+    int e = arr.size() - 1;
+    int ans = -1;
 
-        if(arr[mid]==key){
-            ans=mid;
-            e = mid -1;
+    while(s <= e){
+
+        int mid = s + (e - s)/2;
+
+        if(arr[mid] == key){
+
+            ans = mid;
+            e = mid - 1;
         }
-        else if(arr[mid] > key){
-            e = mid -1;
-        }
-        else{
-            s=mid+1;
-        }
+
+        else if(arr[mid] > key)
+            e = mid - 1;
+
+        else
+            s = mid + 1;
     }
+
     return ans;
 }
 
-//Q- last Occurrence
-int lastOcc(vector<int>&arr, int key){
-    int s=0,e=arr.size()-1,ans=-1;
-    while(s<=e){
-        int mid = s + (e-s)/2;
 
-        if(arr[key]==mid){
-            ans=mid;
-            s=mid+1;
+/*
+Last Occurrence
+- Time : O(log n)
+- Space: O(1)
+- Continue searching towards the right even after finding the key.
+*/
+int lastOcc(vector<int> &arr, int key){
+
+    int s = 0;
+    int e = arr.size() - 1;
+    int ans = -1;
+
+    while(s <= e){
+
+        int mid = s + (e - s)/2;
+
+        if(arr[mid] == key){
+
+            ans = mid;
+            s = mid + 1;
         }
-        else if (arr[mid]>key){
-            e=mid-1;
-        }
-        else{
-            s=mid+1;
-        }
+
+        else if(arr[mid] > key)
+            e = mid - 1;
+
+        else
+            s = mid + 1;
     }
+
     return ans;
 }
 
-//Q- Count of Occurrence
+
+/*
+Count Occurrence
+- Time : O(log n)
+- Space: O(1)
+- Uses First Occurrence and Last Occurrence.
+*/
 int countOcc(vector<int> &arr, int key){
-    int first = firstOcc(arr,key);
+
+    int first = firstOcc(arr, key);
+
+    if(first == -1)
+        return 0;
+
     int last = lastOcc(arr, key);
 
-    if(first==-1)  return 0;
-    return last-first+1;
+    return last - first + 1;
 }
+
+
+/*
+STL Functions
+
+binary_search(begin, end, key)
+    -> Returns true/false
+
+lower_bound(begin, end, key)
+    -> First element >= key
+
+upper_bound(begin, end, key)
+    -> First element > key
+
+Example:
+
+int first = lower_bound(arr.begin(), arr.end(), key) - arr.begin();
+
+int last = upper_bound(arr.begin(), arr.end(), key) - arr.begin() - 1;
+*/

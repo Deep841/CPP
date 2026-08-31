@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int a,b;
+    cin>>a>>b;
+
+    for(int num=a;num<=b;num++){
+        int i;
+        for( i=2;i<num;i++){
+            if(i%num==0){
+                break;
+            }
+        }
+        if(i==num){
+            cout<<num<<endl;
+        }
+    }
+    return 0;
+
+}
+/* this is fourth example of ninth program i.e. break and continue,
+   here we have to print all prime numbers btw a and b, so here we
+   are using nested  for loop statement,first for valid numbers btw a and b
+   and next for checking weather its prime or not. 
+
+*/

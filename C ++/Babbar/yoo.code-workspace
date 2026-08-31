@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../Apna College"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../college lab"
+		},
+		{
+			"path": "../Harry bhai"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"vector": "cpp",
+			"array": "cpp",
+			"iostream": "cpp",
+			"deque": "cpp",
+			"queue": "cpp"
+		}
+	}
+}
